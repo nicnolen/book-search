@@ -35,6 +35,12 @@ const typeDefs = gql`
     image: String
     link: String
   }
+
+  #! JWT
+  type Auth {
+    token: ID!
+    user: User
+  }
 `;
 
 "Export typeDefs"
