@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { removeBookId, saveBookIds } from '../utils/localStorage';
+import { removeBookId } from '../utils/localStorage';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -47,10 +47,6 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
-  //* sync localStorage with what was returned from the userData query
-  const savedBookIds = userData.savedBooks.map(book => book.bookId);
-  saveBookIds(savedBookIds);
 
   return (
     <>

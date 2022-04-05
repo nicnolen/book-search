@@ -13,7 +13,7 @@ import Navbar from './components/Navbar';
 
 //! Establish new link to the GraphQL server at its /graphql api endpoint
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: '/graphql',
 });
 
 //! Create connection to GraphQL API endpoint
