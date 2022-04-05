@@ -11,13 +11,11 @@ const resolvers = {
     //* Find logged in user
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({})
-          .select('-_v -password')
-          .populate('books');
-
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          '-__v -password'
+        );
         return userData;
       }
-
       throw new AuthenticationError('Not logged in');
     },
   },
@@ -35,50 +33,53 @@ const resolvers = {
         console.error(err);
       }
     },
-  },
-  //* check if user is logged in
-  login: async (parent, { email, password }) => {
-    const user = await User.findOne({ email });
+    //* check if user is logged in
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
-    if (!user) {
-      throw new AuthenticationError('Incorrect credentials');
-    }
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
 
-    const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
-    if (!correctPw) {
-      throw new AuthenticationError('Incorrect credentials');
-    }
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
 
-    const token = signToken(user);
-    return { token, user };
-  },
-  //* Save books
-  saveBook: async (parent, args, context) => {
-    if (context.user) {
-      const updatedUser = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        //* take the input type to replace "body" as the argument
-        { $addToSet: { savedBooks: args.input } },
-        { new: true, runValidators: true }
-      );
+      const token = signToken(user);
+      return { token, user };
+    },
+    //* Save books
+    saveBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          //* take the input type to replace "body" as the argument
+          { $addToSet: { savedBooks: args.input } },
+          { new: true, runValidators: true }
+        );
 
-      return updatedUser;
-    }
+        return updatedUser;
+      }
+ 
+      throw new AuthenticationError('You must be logged in');
+    },
+    //* Remove books
+    removeBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId: args.bookId } } },
+          { new: true }
+        );
 
-    throw new AuthenticationError('You must be logged in');
-  },
-  //* Remove books
-  removeBook: async (parent, args, context) => {
-    if (context.user) {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { savedBooks: { bookId: args.bookId } } },
-        { new: true }
-      );
-
-      return updatedUser;
-    }
-    throw new AuthenticationError('You must be logged in');
+        return updatedUser;
+      }
+      throw new AuthenticationError('You must be logged in');
+    },
   },
 };
+
+// Export resolvers
+module.exports = resolvers;
