@@ -25,6 +25,16 @@ const typeDefs = gql`
     bookCount: Int
     savedBooks: [Book]
   }
+
+  #! Find book by id
+  type Book {
+    bookId: String
+    authors: [String]
+    description: String
+    title: String
+    image: String
+    link: String
+  }
 `;
 
 "Export typeDefs"
