@@ -21,3 +21,19 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
   },
+
+  //! Mutation resolvers
+  Mutation: {
+    //* add a new user
+    addUser: async (parent, args) => {
+      try {
+        const user = await User.create(args);
+        const token = signToken(user);
+
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+};
