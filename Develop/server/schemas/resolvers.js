@@ -24,14 +24,10 @@ const resolvers = {
   Mutation: {
     //* add a new user
     addUser: async (parent, args) => {
-      try {
-        const user = await User.create(args);
-        const token = signToken(user);
+      const user = await User.create(args);
+      const token = signToken(user);
 
-        return { token, user };
-      } catch (err) {
-        console.error(err);
-      }
+      return { token, user }; 
     },
     //* check if user is logged in
     login: async (parent, { email, password }) => {
@@ -51,12 +47,12 @@ const resolvers = {
       return { token, user };
     },
     //* Save books
-    saveBook: async (parent, args, context) => {
+    saveBook: async (parent, {args}, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           //* take the input type to replace "body" as the argument
-          { $addToSet: { savedBooks: args.input } },
+          { $addToSet: { savedBooks: input } },
           { new: true, runValidators: true }
         );
 
@@ -66,11 +62,11 @@ const resolvers = {
       throw new AuthenticationError('You must be logged in');
     },
     //* Remove books
-    removeBook: async (parent, args, context) => {
+    removeBook: async (parent, {bookId}, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: args.bookId } } },
+          { $pull: { savedBooks: { bookId: bookId } } },
           { new: true }
         );
 
