@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   #! Find book by id
   type Book {
-    bookId: String
+    bookId: String!
     authors: [String]
     description: String
     title: String
