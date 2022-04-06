@@ -1,6 +1,6 @@
-"TODO: QUERIES FOR APOLLO CLIENT"
-"Import dependencies"
-import { gql } from "@apollo/client"
+"TODO: QUERIES FOR APOLLO CLIENT";
+"Import dependencies";
+import { gql } from '@apollo/client';
 
 export const GET_ME = gql`
   #! Conditionally render data specific to logged in users profile page
@@ -12,7 +12,7 @@ export const GET_ME = gql`
       savedBooks {
         bookId
         authors
-        image 
+        image
         description
         title
         link

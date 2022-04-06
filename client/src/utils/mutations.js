@@ -1,5 +1,5 @@
-"TODO: MUTATIONS FOR APOLLO CLIENT"
-"Import dependencies"
+"TODO: MUTATIONS FOR APOLLO CLIENT";
+"Import dependencies";
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
@@ -32,7 +32,7 @@ export const ADD_USER = gql`
 export const SAVE_BOOK = gql`
   #! Mutation to save a book
   mutation saveBook($input: savedBook!) {
-    saveBook (input: $input) {
+    saveBook(input: $input) {
       _id
       username
       bookCount
@@ -45,7 +45,7 @@ export const SAVE_BOOK = gql`
         description
       }
     }
-  } 
+  }
 `;
 
 export const REMOVE_BOOK = gql`

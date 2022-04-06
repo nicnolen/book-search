@@ -17,7 +17,7 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-//! Creates a middleware that attaches a JWT token as an `authorization` header to every authorized request to the server 
+//! Creates a middleware that attaches a JWT token as an `authorization` header to every authorized request to the server
 const authLink = setContext((_, { headers }) => {
   //* retrieves the token from local storage if it exists
   const token = localStorage.getItem('id_token');
