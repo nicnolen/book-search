@@ -47,12 +47,12 @@ const resolvers = {
       return { token, user };
     },
     //* Save books
-    saveBook: async (parent, { bookData }, context) => {
+    saveBook: async (parent, { input }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           //* take the input type to replace "body" as the argument
-          { $addToSet: { savedBooks: bookData } },
+          { $addToSet: { savedBooks: input } },
           { new: true, runValidators: true }
         );
 
