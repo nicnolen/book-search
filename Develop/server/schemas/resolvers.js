@@ -27,7 +27,7 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-      return { token, user }; 
+      return { token, user };
     },
     //* check if user is logged in
     login: async (parent, { email, password }) => {
@@ -47,18 +47,18 @@ const resolvers = {
       return { token, user };
     },
     //* Save books
-    saveBook: async (parent, { input }, context) => {
+    saveBook: async (parent, { bookData }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           //* take the input type to replace "body" as the argument
-          { $addToSet: { savedBooks: input } },
+          { $addToSet: { savedBooks: bookData } },
           { new: true, runValidators: true }
         );
 
         return updatedUser;
       }
- 
+
       throw new AuthenticationError('You must be logged in');
     },
     //* Remove books
