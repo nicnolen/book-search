@@ -9,6 +9,7 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
+        username
       }
     }
   }
@@ -50,7 +51,7 @@ export const SAVE_BOOK = gql`
 export const REMOVE_BOOK = gql`
   #! Mutation to remove a book
   mutation removeBook($bookId: ID!) {
-    removeBook(bookId:$bookId) {
+    removeBook(bookId: $bookId) {
       _id
       username
       bookCount
