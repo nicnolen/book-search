@@ -36,8 +36,8 @@ This app is a fully functioning Google Books API search engine that allows users
 
 To see the app in action, visit this **[Heroku](https://hidden-caverns-15680.herokuapp.com/)** link. One there, follow the instructions below.
 
-1. Click on the _Login/Signup_ link and login or create an account. When you click on the link, the login model will pop up first. If you need to create an account, click on _Sign Up_ and create an account.
-   **NOTE**: You can search for books without creating an account, but you wont be able to save them
+1. Click on the _Login/Signup_ link and login or create an account. When you click on the link, the login model will pop up first. If you need to create an account, click on _Sign Up_ and create an account.  
+**NOTE**: You can search for books without creating an account, but you wont be able to save them
 
 2. After you are signed in, enter a book title in the white input box under _SEARCH FOR BOOKS_ and click the green _Submit Search_ button.
 
@@ -49,8 +49,8 @@ To see the app in action, visit this **[Heroku](https://hidden-caverns-15680.her
 
 6. If you would like to remove a saved book, click on the red button that says _Delete this Book!_ and the book will be removed.
 
-7. When you are done saving books, click the _Logout_ link at the top of the page to logout.
-   **NOTE**: If you forget to log out, you will automatically be logged out after 2 hours.
+7. When you are done saving books, click the _Logout_ link at the top of the page to logout.  
+**NOTE**: If you forget to log out, you will automatically be logged out after 2 hours.
 
 ## License
 
